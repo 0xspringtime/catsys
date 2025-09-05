@@ -1,0 +1,58 @@
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Test output
+coverage/
+.nyc_output/
+test-results/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+.env-*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Package files
+*.tgz
+
+# Cache directories
+.npm/
+.eslintcache
+.cache/
+.parcel-cache/
+
+# Temporary files
+tmp/
+temp/
+
+# Documentation build
+docs/build/
+docs/api/
+
+# Development files
+NOTES.md
+TODO.md
+DEPLOYMENT.md

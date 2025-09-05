@@ -1,0 +1,115 @@
+{
+  "name": "@catsys/core",
+  "version": "1.0.0",
+  "description": "Category-theoretic system design framework for scalable, modular systems using mathematical foundations",
+  "private": false,
+  "keywords": [
+    "category-theory",
+    "system-design",
+    "microservices",
+    "typescript",
+    "event-sourcing",
+    "cqrs",
+    "distributed-systems",
+    "functional-programming",
+    "scalability",
+    "observability",
+    "kleisli",
+    "functors"
+  ],
+  "author": "CatSys Contributors <catsys@example.com>",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catsys-org/catsys.git"
+  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./examples/*": {
+      "types": "./dist/examples/*.d.ts",
+      "default": "./dist/examples/*.js"
+    }
+  },
+  "bin": {
+    "catsys-test": "./bin/test.js",
+    "catsys-demo": "./bin/demo.js",
+    "catsys": "./bin/run-from-dist.js"
+  },
+  "files": [
+    "dist/src/",
+    "dist/examples/",
+    "dist/test/",
+    "bin/",
+    "README.md",
+    "GUIDE.md",
+    "INSTALLATION.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prebuild": "npm run clean",
+    "dev": "tsc --watch --preserveWatchOutput",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "pretest": "tsc --noEmit",
+    "demo": "npm run build && cp examples/demo.html dist/examples/ && node dist/examples/live-server.js",
+    "example": "npm run demo",
+    "quick-test": "npm run build && node dist/examples/quick-test.js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
+    "prepack": "npm run build",
+    "pack:test": "npm pack",
+    "publish:dry": "npm publish --dry-run",
+    "publish:public": "npm publish --access public"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "fast-check": "^3.18.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "transform": {
+      "^.+\\.tsx?$": ["ts-jest", {
+        "tsconfig": "tsconfig.json"
+      }]
+    },
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/test/**/*.test.ts",
+      "**/examples/**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ],
+    "moduleNameMapper": {
+      "^@catsys/core$": "<rootDir>/dist/src/index",
+      "^@catsys/core/(.*)$": "<rootDir>/dist/src/$1"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/catsys-org/catsys#readme",
+  "bugs": {
+    "url": "https://github.com/catsys-org/catsys/issues"
+  }
+}

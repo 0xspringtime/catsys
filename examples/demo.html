@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatSys Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .output {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #0066cc;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        h1 { color: #333; }
+        h2 { color: #666; }
+    </style>
+</head>
+<body>
+    <h1>🐱 CatSys Interactive Demo</h1>
+    <p>This demo shows the core features of CatSys using a simple counter example.</p>
+        
+        <div class="demo-section">
+        <h2>Counter Example</h2>
+        <div>
+            <button onclick="increment(1)">+1</button>
+            <button onclick="increment(5)">+5</button>
+            <button onclick="increment(10)">+10</button>
+        </div>
+        <div>
+            <h3>State:</h3>
+            <pre id="state" class="output">Loading...</pre>
+            <h3>View:</h3>
+            <pre id="view" class="output">Loading...</pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+        <h2>System Health</h2>
+        <button onclick="checkHealth()">Check Health</button>
+        <pre id="health" class="output">Click button to check health</pre>
+    </div>
+
+    <script>
+        async function increment(amount) {
+            try {
+                const response = await fetch('/api/increment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount })
+                });
+                const data = await response.json();
+                document.getElementById('state').textContent = JSON.stringify(data.state, null, 2);
+                document.getElementById('view').textContent = JSON.stringify(data.view, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function checkHealth() {
+            try {
+                const response = await fetch('/api/health');
+                const health = await response.json();
+                document.getElementById('health').textContent = JSON.stringify(health, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Initial state load
+        increment(0);
+    </script>
+</body>
+</html>
