@@ -1,6 +1,6 @@
 {
-  "name": "@catsys/core",
-  "version": "1.0.0",
+  "name": "catsys",
+  "version": "1.0.1",
   "description": "Category-theoretic system design framework for scalable, modular systems using mathematical foundations",
   "private": false,
   "keywords": [
@@ -21,7 +21,7 @@
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/catsys-org/catsys.git"
+    "url": "git+https://github.com/0xspringtime/catsys.git"
   },
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -30,15 +30,15 @@
       "types": "./dist/src/index.d.ts",
       "default": "./dist/src/index.js"
     },
-    "./examples/*": {
+    "./dist/examples/*": {
       "types": "./dist/examples/*.d.ts",
       "default": "./dist/examples/*.js"
     }
   },
   "bin": {
-    "catsys-test": "./bin/test.js",
-    "catsys-demo": "./bin/demo.js",
-    "catsys": "./bin/run-from-dist.js"
+    "catsys-test": "bin/test.js",
+    "catsys-demo": "bin/demo.js",
+    "catsys": "bin/run-from-dist.js"
   },
   "files": [
     "dist/src/",
@@ -87,9 +87,12 @@
   "jest": {
     "preset": "ts-jest",
     "transform": {
-      "^.+\\.tsx?$": ["ts-jest", {
-        "tsconfig": "tsconfig.json"
-      }]
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.json"
+        }
+      ]
     },
     "testEnvironment": "node",
     "testMatch": [
@@ -108,8 +111,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/catsys-org/catsys#readme",
+  "homepage": "https://github.com/0xspringtime/catsys#readme",
   "bugs": {
-    "url": "https://github.com/catsys-org/catsys/issues"
+    "url": "https://github.com/0xspringtime/catsys/issues"
   }
 }
