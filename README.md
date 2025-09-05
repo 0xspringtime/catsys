@@ -1,8 +1,11 @@
 # CatSys: Category-Theoretic System Design Framework
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![npm version](https://badge.fury.io/js/%40catsys%2Fcore.svg)](https://www.npmjs.com/package/@catsys/core)
+[![npm version](https://img.shields.io/npm/v/catsys.svg)](https://www.npmjs.com/package/catsys)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue)](https://www.typescriptlang.org/)
+
+📦 [npm package](https://www.npmjs.com/package/catsys) | 
+🐙 [GitHub repository](https://github.com/0xspringtime/catsys)
 
 CatSys is a robust framework for building scalable, modular systems using category theory principles. It provides mathematical guarantees for system correctness through 12 foundational laws.
 
