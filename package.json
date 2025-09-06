@@ -96,8 +96,8 @@
     },
     "testEnvironment": "node",
     "testMatch": [
-      "**/test/**/*.test.ts",
-      "**/examples/**/*.test.ts"
+      "**/dist/test/**/*.test.js",
+      "**/dist/examples/**/*.test.js"
     ],
     "collectCoverageFrom": [
       "src/**/*.ts",
