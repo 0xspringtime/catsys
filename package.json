@@ -1,6 +1,6 @@
 {
   "name": "catsys",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Category-theoretic system design framework for scalable, modular systems using mathematical foundations",
   "private": false,
   "keywords": [
