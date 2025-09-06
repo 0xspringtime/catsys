@@ -1,0 +1,53 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.compose = compose;
+exports.composeForTesting = composeForTesting;
+// src/app/compose.ts - URL Shortener composition root
+const handlers_1 = require("./handlers");
+const observability_1 = require("../impl/observability");
+const spec_1 = require("../spec");
+// Main composition function - applies R and O functors
+function compose(ports) {
+    // R functor: Spec → Impl (realize with concrete adapters)
+    const handle0 = (0, handlers_1.makeHandle)(ports);
+    const httpHandle0 = (0, handlers_1.makeHttpHandle)(ports);
+    const resolver0 = (0, handlers_1.makeResolver)(ports);
+    // O functor: Impl → Impl×Obs (wrap with observability)
+    const handle = (0, observability_1.withMetrics)('url_shortener_handle', handle0);
+    const httpHandle = (0, observability_1.withMetrics)('url_shortener_http', httpHandle0);
+    const resolver = (0, observability_1.withMetrics)('url_shortener_resolve', resolver0);
+    return {
+        handle,
+        httpHandle,
+        resolver,
+        // Utility functions
+        getState: (0, observability_1.withMetrics)('get_state', async () => {
+            // In production, you'd maintain state snapshots
+            // For demo, rebuild from events
+            return spec_1.s0; // Simplified
+        }),
+        // Health check
+        healthCheck: (0, observability_1.withMetrics)('health_check', async () => {
+            try {
+                await ports.sql.query('SELECT 1');
+                return { status: 'healthy', timestamp: new Date().toISOString() };
+            }
+            catch (error) {
+                return { status: 'unhealthy', error: error instanceof Error ? error.message : String(error), timestamp: new Date().toISOString() };
+            }
+        }),
+    };
+}
+// Composition for testing (all in-memory) - import adapters directly
+function composeForTesting() {
+    // Import adapters locally to avoid potential circular dependency issues
+    const { adapters } = require('./adapters');
+    return compose({
+        sql: adapters.inMemorySql(),
+        bus: adapters.inMemoryBus(),
+        kv: adapters.inMemoryKV(),
+        http: adapters.mockHttp(),
+        clock: adapters.systemClock(),
+        id: adapters.randomIdGen(),
+    });
+}

@@ -1,0 +1,13 @@
+export * from './spec';
+export * from './ports';
+export * from './impl';
+export * from './app/handlers';
+export { createGenericHandler, createGenericService, createEventSourcingHandler, createCQRSHandler } from './app/handlers-generic';
+export * from './app/compose';
+export * from './app/compose-generic';
+export { adapters, adapterRegistry } from './app/adapters';
+export * from './impl/observability';
+export * from './law-enforcement';
+export declare const FRAMEWORK_VERSION = "1.0.0";
+export declare const LAWS_VERIFIED = 12;
+export declare const TESTS_PASSING = true;
